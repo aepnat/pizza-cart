@@ -5,8 +5,11 @@ import styles from "./App.module.css";
 import Logo from "../svg/pizza.svg";
 import Cart from "./Cart";
 import AppStateProvider from "./AppState";
+import SpecialOffer from "./SpecialOffer";
 
 const App = () => {
+    const specialOffer = pizzas.find(pizza => pizza.specialOffer);
+
     return (
         <AppStateProvider>
             <div className={styles.container}>
@@ -15,7 +18,8 @@ const App = () => {
                     <div className={styles.siteTitle}>Delicious Pizza</div>
                     <Cart />
                 </div>
-                <ul>{pizzas.map((pizza, index) => <Pizza key={index} pizza={pizza} />)}</ul>
+                {specialOffer && <SpecialOffer pizza={specialOffer}/>}
+                <ul className={styles.pizzaList}>{pizzas.map((pizza, index) => <Pizza key={index} pizza={pizza} />)}</ul>
             </div>
         </AppStateProvider>
     )
